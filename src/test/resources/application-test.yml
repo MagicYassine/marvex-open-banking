@@ -1,0 +1,40 @@
+app:
+  base-url: http://localhost:8080
+
+spring:
+  mail:
+    host: localhost
+    port: 1025
+    username: test@marvex.co.uk
+    password: test
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+
+jwt:
+  secret: "test-secret-key-must-be-at-least-256-bits-long-for-hs256-algorithm"
+  access-token-expiry-ms: 900000
+  refresh-token-expiry-ms: 604800000
+
+webhook:
+  secret: "webhook-shared-secret"
+
+payment:
+  provider: mock
+
+mock:
+  provider:
+    outcome: PAID
+    webhook-url: http://localhost:8080/webhooks/payment
+
+yapily:
+  base-url: https://api.yapily.com
+  basic-token: "test-token"
+  user-uuid: "00000000-0000-0000-0000-000000000000"
+  callback: http://localhost:8080/pay

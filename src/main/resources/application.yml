@@ -1,0 +1,51 @@
+spring:
+  profiles:
+    active: local
+  mail:
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+server:
+  shutdown: graceful
+  forward-headers-strategy: native
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
+  tomcat:
+    max-http-form-post-size: 512KB
+
+logging:
+  level:
+    org.springframework.web.socket.config: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %highlight(%-5level) [%X{traceId:-no-trace}] %cyan(%logger{36}) - %msg%n"
+
+yapily:
+  base-url: https://api.yapily.com
+
+mock:
+  provider:
+    outcome: PAID
+
+infisical:
+  client-id: ${INFISICAL_CLIENT_ID:}
+  client-secret: ${INFISICAL_CLIENT_SECRET:}
+  project-id: ${INFISICAL_PROJECT_ID:}
+  environment-slug: ${INFISICAL_ENV_SLUG:}
